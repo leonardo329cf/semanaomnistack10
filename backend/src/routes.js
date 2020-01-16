@@ -11,5 +11,7 @@ routes.post('/devs', DevController.store)
 
 routes.get('/search', SearchController.index)
 
+routes.put('/devs/:github_username', DevController.update)
 
+routes.delete('/devs/:github_username', DevController.delete)
 module.exports = routes
