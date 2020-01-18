@@ -1,7 +1,7 @@
 const axios = require('axios');
 const Dev = require('../models/Dev');
 const parseStringAsArray = require('../utils/parseStringAsArray')
-
+const { findConnections, sendMessage } = require('../websocket')
 
 module.exports = {
     async index(request, response) {
@@ -33,8 +33,18 @@ module.exports = {
                 techs: techsArray,
                 location,
             })
+            
+            
+            const sendSocketMessageTo = findConnections(
+                { latitude, longitude },
+                techsArray,
+            )
+
+            sendMessage(sendSocketMessageTo, 'new-dev', dev)
+
         }
-        return response.json(dev)
+            return response.json(dev)
+        
     },
     async update(request, response) {
         const { github_username } = request.params

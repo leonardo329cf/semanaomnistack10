@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const PointSchema = require('../util/PointSchema');
+mongoose.set('useFindAndModify', false);
 
 const DevSchema = new mongoose.Schema({
     name: String,
